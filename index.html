@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #dbd7d7;
+        }
+        div{
+            border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            height: 70%;
+            justify-content: space-evenly;
+            align-items: center;
+            background-color: white;
+        }
+        h1{
+            color: blue;
+        }
+        #text{
+            width: 200px;
+            height: 28px;
+            padding: 5px;
+        }
+        button{
+            background-color: blue;
+            color: white;
+            border: none;
+            width: 90px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do-List</h1>
+        <input type="text" placeholder="Enter new text" id="input-text">
+        <button onclick="addList();" >TO DO</button>
+        <ul id="task-list"></ul>
+    </div>
+    <script>
+        function addList() {
+            var inputText = document.getElementById("input-text");
+            var taskList = document.getElementById("task-list");
+
+            if(!inputText.value.trim()) {
+                alert("Empty! please enter some text")
+            }
+            var li = document.createElement("li");
+            li.innerText = inputText.value;
+            taskList.appendChild(li);
+
+            var removeBtn = document.createElement("button")
+            removeBtn.innerText = "remove";
+            removeBtn.className = "remove-btn";
+            li.appendChild(removeBtn);
+            removeBtn.onclick = function() {
+                taskList.removeChild(li);
+            }
+            inputText.value = "";
+
+        }
+    </script>
+</body>
+</html>
