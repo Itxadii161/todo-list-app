@@ -8,65 +8,109 @@
         body{
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #dbd7d7;
+            background-color: #f4f4f9;
         }
         div{
-            border: 1px solid black;
-            display: flex;
-            flex-direction: column;
-            width: 300px;
-            height: 70%;
-            justify-content: space-evenly;
-            align-items: center;
+            height: 100%;
+            width: 50%;
+            border-radius: 20px;
+            box-shadow: 0px 0px 20px 0px rgb(0, 0, 0, 0.3);           
             background-color: white;
         }
         h1{
             color: blue;
+            text-align: center;
         }
-        #text{
-            width: 200px;
-            height: 28px;
+        #undo{
+            display: none;
+        }
+        #input-text{
+            width: 57%;
+            height: 23px;
             padding: 5px;
+            border: none;
+            box-shadow: 0px 0px 10px 0px rgb(0, 0, 0, 0.7);
+            border-radius: 10px;
+            margin-left: 19px;
         }
-        button{
+        #to-do{
             background-color: blue;
+            box-shadow: 0px 0px 10px 0px blue;
+            border-radius: 10px;
             color: white;
             border: none;
-            width: 90px;
-            height: 30px;
+            width: 25%;
+            height: 36px;
+            margin-left: 18px;
         }
+        #input-text:focus{
+            border: 1px solid rgb(0, 0, 0, 0.3);
+            outline: none;
+            box-shadow: none;
+        }
+        #to-do:hover{
+            background-color: rgb(12, 245, 63);
+            cursor: pointer;
+            box-shadow: 0px 0px 10px 0px rgb(12, 245, 63);
+        }
+        ul{
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #eee;
+            margin: 5px 5px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 10px;
+        }
+        li .remove-btn {
+            background-color: crimson;
+            width: 24%;
+            height: 33px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+        }
+
+        
+       
+    
+
     </style>
 </head>
 <body>
     <div class="container">
         <h1>To-Do-List</h1>
         <input type="text" placeholder="Enter new text" id="input-text">
-        <button onclick="addList();" >TO DO</button>
-        <ul id="task-list"></ul>
+        <button id="to-do" onclick="addList();" >TO DO</button>
+        <ul id="task-list"><button id="undo">UNDO</button></ul>
     </div>
     <script>
         function addList() {
             var inputText = document.getElementById("input-text");
             var taskList = document.getElementById("task-list");
+            var undoBtn = document.getElementById("undo"); 
 
             if(!inputText.value.trim()) {
-                alert("Empty! please enter some text")
-            }
+                alert("Empty! Please enter some text")
+            }else{
             var li = document.createElement("li");
             li.innerText = inputText.value;
             taskList.appendChild(li);
 
-            var removeBtn = document.createElement("button")
+            var removeBtn = document.createElement("button");
             removeBtn.innerText = "remove";
             removeBtn.className = "remove-btn";
             li.appendChild(removeBtn);
             removeBtn.onclick = function() {
                 taskList.removeChild(li);
+                undoBtn.style.display = "block"
             }
             inputText.value = "";
-
+        }
         }
     </script>
 </body>
