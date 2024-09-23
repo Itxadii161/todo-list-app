@@ -10,7 +10,7 @@
             justify-content: center;
             background-color: #f4f4f9;
         }
-        div{
+        .container{
             height: 100%;
             width: 50%;
             border-radius: 20px;
@@ -31,17 +31,17 @@
             border: none;
             box-shadow: 0px 0px 10px 0px rgb(0, 0, 0, 0.7);
             border-radius: 10px;
-            margin-left: 19px;
+            /* margin-left: 19px; */
         }
         #to-do{
             background-color: blue;
-            box-shadow: 0px 0px 10px 0px blue;
+            box-shadow: 0px 0px 5px 0px blue;
             border-radius: 10px;
             color: white;
             border: none;
             width: 25%;
             height: 36px;
-            margin-left: 18px;
+            /* margin-left: px; */
         }
         #input-text:focus{
             border: 1px solid rgb(0, 0, 0, 0.3);
@@ -51,7 +51,7 @@
         #to-do:hover{
             background-color: rgb(12, 245, 63);
             cursor: pointer;
-            box-shadow: 0px 0px 10px 0px rgb(12, 245, 63);
+            box-shadow: 0px 0px 5px 0px rgb(12, 245, 63);
         }
         ul{
             list-style-type: none;
@@ -68,13 +68,29 @@
         }
         li .remove-btn {
             background-color: crimson;
+            box-shadow: 0px 0px 5px 0px crimson;
             width: 24%;
             height: 33px;
             border: none;
             border-radius: 10px;
             color: white;
         }
-
+        .no-thanks{
+            display: none;
+            width: 24%;
+            height: 33px;
+            border: none;
+            border-radius: 10px;
+            background-color: rgb(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            box-shadow: 0px 0px 5px 0px rgb(0, 0, 0, 0.7);
+            
+        }
+        .input-btn{
+            padding: 0;
+            
+        }
         
        
     
@@ -84,34 +100,60 @@
 <body>
     <div class="container">
         <h1>To-Do-List</h1>
+        <div class="input-btn">
         <input type="text" placeholder="Enter new text" id="input-text">
-        <button id="to-do" onclick="addList();" >TO DO</button>
-        <ul id="task-list"><button id="undo">UNDO</button></ul>
-    </div>
+        <button id="to-do" onclick="addList();" >TO DO</button></div>
+        <ul id="task-list"></ul>
     <script>
         function addList() {
+            // assigning element to var through id
             var inputText = document.getElementById("input-text");
             var taskList = document.getElementById("task-list");
             var undoBtn = document.getElementById("undo"); 
 
+            // checking blank input
             if(!inputText.value.trim()) {
                 alert("Empty! Please enter some text")
-            }else{
+            }
+            else{
             var li = document.createElement("li");
             li.innerText = inputText.value;
             taskList.appendChild(li);
-
+            var removedItem = inputText.value;
+            
             var removeBtn = document.createElement("button");
             removeBtn.innerText = "remove";
             removeBtn.className = "remove-btn";
             li.appendChild(removeBtn);
+
+            // no thnks
+            var no = document.createElement("button");
+                   no.className = "no-thanks";
+                   no.innerText = "No Thanks";
+                   no.style.display = 'none';
+                   li.appendChild(no);
+                   no.onclick = function() {
+                    taskList.removeChild(li);
+                   }
+
             removeBtn.onclick = function() {
-                taskList.removeChild(li);
-                undoBtn.style.display = "block"
+                
+                if (removeBtn.innerText === "remove") {
+                    li.firstChild.nodeValue = ""; 
+                    removeBtn.innerText = "UNDO";
+                    no.style.display = 'block';
+                }
+                else {             
+                    // li.removeChild(no);
+                    no.style.display = 'none'
+                    removeBtn.innerText = "remove";
+                    li.firstChild.nodeValue = removedItem;
+                }                
             }
             inputText.value = "";
+
         }
-        }
+    }
     </script>
 </body>
 </html>
