@@ -68,9 +68,9 @@
             align-items: center;
             border-radius: 10px;
         }
-        li: {
+        /* li:active {
             text-decoration: line-through;
-        }
+        } */
         li .remove-btn {
             background-color: crimson;
             box-shadow: 0px 0px 5px 0px crimson;
@@ -84,6 +84,7 @@
         li .remove-btn:hover{
             cursor: pointer;
         }
+       
         .no-thanks{
             display: none;
             width: 89px;
@@ -119,25 +120,35 @@
             // assigning element to var through id
             var inputText = document.getElementById("input-text");
             var taskList = document.getElementById("task-list");
-            var undoBtn = document.getElementById("undo"); 
 
             // checking blank input
+
             if(!inputText.value.trim()) {
                 alert("Empty! Please enter some text")
-            }
-            else{ 
-                // if not blanked
-            var li = document.createElement("li");
-            li.innerText = inputText.value;
-            taskList.appendChild(li);
-
-            // storing removed data
-            var removedItem = inputText.value;
+            }else{// if not blanked then the text will add
             
+                // creating li
+            var li = document.createElement("li");
+
+            // creating span
+            var taskText = document.createElement("span");
+            taskText.innerText = inputText.value;
+
+            // on clicking list the text will be crossed
+            li.onclick = function() {
+                    taskText.style.textDecoration = taskText.style.textDecoration === 'line-through' ? 'none' : 'line-through';
+                    taskText.style.opacity = taskText.style.opacity === '0.5' ? '' : '0.5';
+                }
+            
+            // creating remove btn;
             var removeBtn = document.createElement("button");
             removeBtn.innerText = "remove";
             removeBtn.className = "remove-btn";
+            
+            // placing elements
+            li.appendChild(taskText);                
             li.appendChild(removeBtn);
+            taskList.appendChild(li);
 
             //creating no thanks btn
             var no = document.createElement("button");
@@ -145,27 +156,29 @@
                    no.innerText = "No Thanks";
                    no.style.display = 'none';
                    li.appendChild(no);
-                   no.onclick = function() {
+            //operation of no thanks btn 
+            no.onclick = function() {
                     taskList.removeChild(li);
                    }
-                //    perform event by clicking on remove btn
+
+            //perform event by clicking on remove btn
             removeBtn.onclick = function() {
                 
                 if (removeBtn.innerText === "remove") {
-                    li.firstChild.nodeValue = ""; 
+                    // taskText.innerText = "";
+                    taskText.style.display = "none";
                     removeBtn.innerText = "UNDO";
                     no.style.display = 'block';
                 }
                 else {             
-                    // li.removeChild(no);
+                    taskText.style.display = "block";
                     no.style.display = 'none'
                     removeBtn.innerText = "remove";
-                    li.firstChild.nodeValue = removedItem;
+                    // taskText.innerText = removedItem;
                 }                
             }
-
+            
             inputText.value = "";
-
         }
     }
     </script>
