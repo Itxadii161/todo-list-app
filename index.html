@@ -11,6 +11,7 @@
             background-color: #f4f4f9;
         }
         .container{
+            margin-top: 50px;
             height: 100%;
             width: 401px;
             border-radius: 20px;
@@ -18,10 +19,10 @@
             background-color: white;
         }
         h1{
-            color: blue;
+            color: rgb(4, 4, 155);
             text-align: center;
             margin: 40px 0px;
-            text-shadow: 1px 5px 10px blue;
+            text-shadow: 1px 5px 10px rgb(154, 154, 182);
         }
         #undo{
             display: none;
@@ -35,8 +36,8 @@
             border-radius: 10px;
         }
         #to-do{
-            background-color: blue;
-            box-shadow: 0px 0px 10px 0px blue;
+            background-color: rgb(4, 4, 155);
+            box-shadow: 0px 0px 10px 0px rgba(42, 72, 204,0.7);
             border-radius: 10px;
             border: none;
             /* padding: 15px; */
@@ -51,9 +52,9 @@
             box-shadow: none;
         }
         #to-do:hover{
-            background-color: rgb(12, 245, 63);
+            background-color: rgb(7, 105, 28);
             cursor: pointer;
-            box-shadow: 0px 0px 5px 0px rgb(12, 245, 63);
+            box-shadow: 0px 0px 5px 0px rgb(7, 105, 28);
         }
         ul{
             list-style-type: none;
@@ -68,9 +69,15 @@
             align-items: center;
             border-radius: 10px;
         }
-        /* li:active {
-            text-decoration: line-through;
-        } */
+        span{
+            /* white-space: nowrap; */
+            text-overflow:ellipsis;
+            overflow: hidden;
+            width: 280px;
+            height: 100%;
+            border-right: 1px solid rgb(0, 0, 0, 0.1);
+        }
+        
         li .remove-btn {
             background-color: crimson;
             box-shadow: 0px 0px 5px 0px crimson;
