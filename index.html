@@ -12,7 +12,7 @@
         }
         .container{
             height: 100%;
-            width: 50%;
+            width: 401px;
             border-radius: 20px;
             box-shadow: 0px 0px 20px 0px rgb(0, 0, 0, 0.3);           
             background-color: white;
@@ -20,29 +20,31 @@
         h1{
             color: blue;
             text-align: center;
+            margin: 40px 0px;
+            text-shadow: 1px 5px 10px blue;
         }
         #undo{
             display: none;
         }
         #input-text{
-            width: 57%;
+            width: 257px;
             height: 23px;
-            padding: 5px;
+            padding: 10px;
             border: none;
             box-shadow: 0px 0px 10px 0px rgb(0, 0, 0, 0.7);
             border-radius: 10px;
-            /* margin-left: 19px; */
         }
         #to-do{
             background-color: blue;
-            box-shadow: 0px 0px 5px 0px blue;
+            box-shadow: 0px 0px 10px 0px blue;
             border-radius: 10px;
-            color: white;
             border: none;
-            width: 25%;
-            height: 36px;
-            /* margin-left: px; */
+            /* padding: 15px; */
+            color: #ffff;
+            width: 90px;
+            height: 44px;
         }
+          
         #input-text:focus{
             border: 1px solid rgb(0, 0, 0, 0.3);
             outline: none;
@@ -66,35 +68,43 @@
             align-items: center;
             border-radius: 10px;
         }
+        li: {
+            text-decoration: line-through;
+        }
         li .remove-btn {
             background-color: crimson;
             box-shadow: 0px 0px 5px 0px crimson;
-            width: 24%;
+            width: 89px;
             height: 33px;
             border: none;
             border-radius: 10px;
             color: white;
+            margin-right: -2px;
+        }
+        li .remove-btn:hover{
+            cursor: pointer;
         }
         .no-thanks{
             display: none;
-            width: 24%;
+            width: 89px;
             height: 33px;
             border: none;
             border-radius: 10px;
             background-color: rgb(0, 0, 0, 0.7);
             color: white;
             border: none;
+            margin-right: -2px;
             box-shadow: 0px 0px 5px 0px rgb(0, 0, 0, 0.7);
-            
+        }
+        .no-thanks:hover{
+            cursor: pointer;
         }
         .input-btn{
             padding: 0;
-            
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 11px;
         }
-        
-       
-    
-
     </style>
 </head>
 <body>
@@ -115,10 +125,13 @@
             if(!inputText.value.trim()) {
                 alert("Empty! Please enter some text")
             }
-            else{
+            else{ 
+                // if not blanked
             var li = document.createElement("li");
             li.innerText = inputText.value;
             taskList.appendChild(li);
+
+            // storing removed data
             var removedItem = inputText.value;
             
             var removeBtn = document.createElement("button");
@@ -126,7 +139,7 @@
             removeBtn.className = "remove-btn";
             li.appendChild(removeBtn);
 
-            // no thnks
+            //creating no thanks btn
             var no = document.createElement("button");
                    no.className = "no-thanks";
                    no.innerText = "No Thanks";
@@ -135,7 +148,7 @@
                    no.onclick = function() {
                     taskList.removeChild(li);
                    }
-
+                //    perform event by clicking on remove btn
             removeBtn.onclick = function() {
                 
                 if (removeBtn.innerText === "remove") {
@@ -150,6 +163,7 @@
                     li.firstChild.nodeValue = removedItem;
                 }                
             }
+
             inputText.value = "";
 
         }
